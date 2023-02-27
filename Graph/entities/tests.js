@@ -1,0 +1,1 @@
+console.log([1,2, 3].some(e => e === 1 || e === 2 ))

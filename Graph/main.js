@@ -6,6 +6,21 @@ const Dijkstra = require('./entities/Dijkstra');
 
 const graph = new Graph();
 
+graph.createEdge('g', 'h', 1, true);
+graph.createEdge('c', 'i', 2, true);
+graph.createEdge('f', 'g', 2, true);
+graph.createEdge('a', 'b', 4, true);
+graph.createEdge('c', 'f', 4, true);
+graph.createEdge('g', 'i', 6, true);
+graph.createEdge('c', 'd', 7, true);
+graph.createEdge('h', 'i', 7, true);
+graph.createEdge('a', 'h', 8, true);
+graph.createEdge('b', 'c', 8, true);
+graph.createEdge('d', 'e', 9, true);
+graph.createEdge('e', 'f', 10, true);
+graph.createEdge('b', 'h', 11, true);
+graph.createEdge('d', 'f', 14, true);
+
 let opt;
 
 do {
@@ -28,7 +43,14 @@ do {
             const dest = prompt('Dest: ').toUpperCase();
             const edge = Math.round(Number(prompt('Edge (a positive value): ')));
             
-            graph.createEdge(src, dest, edge);
+            do{
+                const isBidirectional = prompt('Is bidirectional? (y/n): ').toUpperCase();
+                if(isBidirectional !== 'Y' || isBidirectional !== 'N')
+                    console.log('Invalid input!\n');
+
+            }while(isBidirectional !== 'Y' || isBidirectional !== 'N');
+
+            graph.createEdge(src, dest, edge, isBidirectional == 'Y'? true : false);
 
             break;
 

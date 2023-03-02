@@ -20,12 +20,12 @@ class Kruskal {
         for(const node of this.graph.getNodes()) {
             const iterator = node.getEdges();
 
-            for(const adj of iterator) {
-                if(!this.edgeExists(node, adj[0])) {
+            for(const [ adj, edge ] of iterator) {
+                if(!this.edgeExists(node, adj)) {
                     this.edgesList.push({
-                        edge: adj[1],
+                        edge: edge,
                         nodeA: node.getName(),
-                        nodeB: adj[0].getName(),
+                        nodeB: adj.getName(),
                     });
                 }
             }
@@ -42,15 +42,11 @@ class Kruskal {
                 break;
                 
             for(const subSet of set) {
-                if(this.areInTheSameSet(set, edge.nodeA, edge.nodeB)){
-                    console.log('*'.repeat(20))
-                    console.log(edge.nodeA + '=' + edge.nodeB)
+                if(this.areInTheSameSet(set, edge.nodeA, edge.nodeB))
                     break;
-                }
+                
                 
                 set = this.mergeSubSets(set, edge.nodeA, edge.nodeB);
-                console.log('merge: ', set);
-                console.log('*'.repeat(20));
             
             this.mst.createEdge(edge.nodeA, edge.nodeB, edge.edge);
             this.mst.createEdge(edge.nodeB, edge.nodeA, edge.edge);
@@ -77,9 +73,7 @@ class Kruskal {
         set = set.filter(s => !s.some(e => e === nodeA));
         set = set.filter(s => !s.some(e => e === nodeB));
 
-        console.log('in the function before merge', set, '**', subSetA, '**',subSetB);
         set.push([...subSetA, ...subSetB]); 
-        console.log('in the function after merge',set);
         return set;
     }
     edgeExists(nodeA, nodeB) {
@@ -98,22 +92,23 @@ class Kruskal {
     }
    
 }
+module.exports = Kruskal;
 
-const graph = new Graph();
+// const graph = new Graph();
 
-graph.createEdge('g', 'h', 1, true);
-graph.createEdge('c', 'i', 2, true);
-graph.createEdge('f', 'g', 2, true);
-graph.createEdge('a', 'b', 4, true);
-graph.createEdge('c', 'f', 4, true);
-graph.createEdge('g', 'i', 6, true);
-graph.createEdge('c', 'd', 7, true);
-graph.createEdge('h', 'i', 7, true);
-graph.createEdge('a', 'h', 8, true);
-graph.createEdge('b', 'c', 8, true);
-graph.createEdge('d', 'e', 9, true);
-graph.createEdge('e', 'f', 10, true);
-graph.createEdge('b', 'h', 11, true);
-graph.createEdge('d', 'f', 14, true);
+// graph.createEdge('g', 'h', 1, true);
+// graph.createEdge('c', 'i', 2, true);
+// graph.createEdge('f', 'g', 2, true);
+// graph.createEdge('a', 'b', 4, true);
+// graph.createEdge('c', 'f', 4, true);
+// graph.createEdge('g', 'i', 6, true);
+// graph.createEdge('c', 'd', 7, true);
+// graph.createEdge('h', 'i', 7, true);
+// graph.createEdge('a', 'h', 8, true);
+// graph.createEdge('b', 'c', 8, true);
+// graph.createEdge('d', 'e', 9, true);
+// graph.createEdge('e', 'f', 10, true);
+// graph.createEdge('b', 'h', 11, true);
+// graph.createEdge('d', 'f', 14, true);
 
-const kruskal = new Kruskal(graph);
+// const kruskal = new Kruskal(graph);

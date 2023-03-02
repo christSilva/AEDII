@@ -31,7 +31,7 @@ class Graph {
         // console.log('\nEdge added sucessful!');
     }
     haveErrors(source, dest, edge) {
-        if(this.nodes.length === 20) {
+        if(this.getLength() === 20) {
             console.log('\nERROR: The graph has reached the max length');
             return true;
         }
@@ -50,23 +50,23 @@ class Graph {
         this.nodes.push(newNode);
     }
     printAdjArray() {
-        if(this.nodes.length === 0) {
+        if(this.getLength() === 0) {
             console.log('Graph\'s empty');
             return;
         }
         let adjArray = [];
         
-        for(let i = 0; i < this.nodes.length; i++) {
+        for(let i = 0; i < this.getLength(); i++) {
             adjArray[i] = [];
 
-            for(let j = 0; j < this.nodes.length; j++) 
+            for(let j = 0; j < this.getLength(); j++) 
                 adjArray[i].push(this.nodes[i].getEdge(this.nodes[j]));
             
             console.log(this.nodes[i].name, adjArray[i]);
         }
     }
     printAdjList() {
-        if(this.nodes.length === 0) {
+        if(this.getLength() === 0) {
             console.log('Graph\'s empty');
             return;
         }
@@ -81,6 +81,9 @@ class Graph {
     }
     getNodes() {
         return this.nodes;
+    }
+    getLength() {
+        return this.nodes.length;
     }
 }
 module.exports = Graph;
